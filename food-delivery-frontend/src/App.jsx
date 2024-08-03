@@ -6,10 +6,26 @@ import Cart from './pages/Cart/Cart'
 import PlaceOrder from './pages/PlaceOrder/PlaceOrder'
 import Footer from './components/Footer/Footer'
 import LoginPopUp from './components/LoginPopUp/LoginPopUp'
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
+import axios from 'axios'
 const App = () => {
   const [showLogin,setShowLogin]=useState(false);
-
+  const [User,setUser]=useState([])
+  useEffect(()=>{
+    async function getUsers() {
+      try{
+        const users=await axios.get("http://127.0.0.1:8000/base/user/")
+        console.log(users.data)
+        setUser([users.data])
+      }catch(error){
+        console.log(error)
+      }
+      finally{
+        console.log("done")
+      }
+    }
+    getUsers()
+  },[])
   return (
     <>
       {showLogin?<LoginPopUp setShowLogin={setShowLogin}/>:<></>}
