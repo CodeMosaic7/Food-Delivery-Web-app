@@ -1,7 +1,9 @@
 
 from django.urls import path
-from .import views
+
+from .views import UserDetails
+
 
 urlpatterns = [
-    path('api/login',views.UserDetails,name="UserDetails"),
+    path('api/login/',UserDetails,name="UserDetails"),
 ]
